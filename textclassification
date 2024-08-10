@@ -1,0 +1,33 @@
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import make_pipeline
+
+# Sample data
+texts = [
+    "I love this new phone! The camera quality is amazing.",
+    "The service at this restaurant was terrible. I'm never coming back.",
+    "I went to the store today and bought some groceries."
+]
+labels = ['positive', 'negative', 'neutral']
+
+# Create a pipeline to vectorize the text and train a Naive Bayes classifier
+model = make_pipeline(CountVectorizer(), MultinomialNB())
+
+# Train the model
+model.fit(texts, labels)
+
+# Sample test data
+test_texts = [
+    "The food was delicious and the service was excellent.",
+    "I hate waiting in long lines.",
+    "Just bought a new laptop, can't wait to use it."
+]
+
+# Predict the categories
+predicted_labels = model.predict(test_texts)
+
+# Output the results
+for text, label in zip(test_texts, predicted_labels):
+    print(f"Text: {text}")
+    print(f"Predicted Label: {label}")
+    print()
